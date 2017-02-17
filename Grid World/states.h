@@ -21,6 +21,7 @@ public:
   void updateUtility();
   void setNewUtility(float);
   string getCoords();
+  void setOptimalPolicy();
 private:
   int xCord;
   int yCord;
@@ -29,6 +30,7 @@ private:
   float utility;
 };
 
+void getNeighboringStates(int, int, int*, int*, int*, int*, int*, int*, int*, int*);
 float getRewardTemp(int, int, int, int, int, int);
 string IntToString (int);
 extern map<state*, float> newUtilitiesMap;
