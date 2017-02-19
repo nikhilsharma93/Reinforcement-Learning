@@ -1,3 +1,8 @@
+/*
+  states.h: Header file for class state and the revlevant functions
+  @author Nikhil Sharma
+*/
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -21,6 +26,8 @@ public:
   void updateUtility();
   void setNewUtility(float);
   string getCoords();
+  int getXCord();
+  int getYCord();
   void setOptimalPolicy();
 private:
   int xCord;
