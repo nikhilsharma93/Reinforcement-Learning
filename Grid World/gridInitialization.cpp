@@ -68,7 +68,7 @@ void initializeGrid(int nH, int nW, float rewardNonTerminal, float rewardPosTerm
   blue[2] = 0;
 
 
-  //Light Blue color vector 3d
+  //Red color vector 3d
   Vec3b red;
   red[0] = 0;
   red[1] = 0;
