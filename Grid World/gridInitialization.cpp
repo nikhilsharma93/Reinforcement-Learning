@@ -120,7 +120,7 @@ void initializeGrid(int nH, int nW, float rewardNonTerminal, float rewardPosTerm
     }
   }
 
-  GetStdoutFromCommand("zenity  --info   --text \"Select the Positive Terminal points\"");
+  GetStdoutFromCommand("zenity  --info   --text \"Select the Positive Terminal points. Press the Enter key to confirm a selection, and press the Escape key once you have selected all the points.\"");
   //For Positive States
   while(1){
     imshow("Initialize The Grid", outputImage);
@@ -137,7 +137,7 @@ void initializeGrid(int nH, int nW, float rewardNonTerminal, float rewardPosTerm
     }
   }
 
-  GetStdoutFromCommand("zenity  --info   --text \"Select the Negative Terminal points\"");
+  GetStdoutFromCommand("zenity  --info   --text \"Select the Negative Terminal points. Press the Enter key to confirm a selection, and press the Escape key once you have selected all the points.\"");
   //For Negative States
   while(1){
     imshow("Initialize The Grid", outputImage);
