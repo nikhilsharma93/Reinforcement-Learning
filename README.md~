@@ -11,6 +11,5 @@ If you decide to go in a direction 'X', you would end up going:
 2) To the left of X with a probability 0.1, and
 3) To the right of X with a probability 0.1
 
-The discount factor (gamma) is set to 1.0, but it can be changed in the GridWorld.cpp source file. 
-Sample screenshots can be found in the folder SampleOutput.
+The discounted factor is set to 1.0, but it can be changed in the GridWorld.cpp source file. 
 
