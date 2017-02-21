@@ -6,10 +6,12 @@ To see it working, run the executable **GridWorld**.
 
 You can choose the number of blocked states, and the number of positive and negative terminal states. The rewards for non-terminal states, positive terminal states, and negative terminal states can be set at the beginning. The current implementation does not allow adding more than one type of blocked/non-terminal state, but the extension to that is trivial. 
 The environment assumed is stochastic, with the following probabilities:
+
 If you decide to go in a direction 'X', you would end up going:
 1) In that direction with a probability 0.8, 
 2) To the left of X with a probability 0.1, and
 3) To the right of X with a probability 0.1
 
-The discounted factor is set to 1.0, but it can be changed in the GridWorld.cpp source file. 
+The discount factor (gamma) is set to 1.0, but it can be changed in the GridWorld.cpp source file. 
+Sample screenshots can be found in the folder SampleOutput.
 
