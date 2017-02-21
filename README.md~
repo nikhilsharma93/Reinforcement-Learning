@@ -8,9 +8,13 @@ You can choose the number of blocked states, and the number of positive and nega
 The environment assumed is stochastic, with the following probabilities:
 
 If you decide to go in a direction 'X', you would end up going:
+
 &nbsp;&nbsp;&nbsp;1) In that direction with a probability 0.8, 
+
 &nbsp;&nbsp;&nbsp;2) To the left of X with a probability 0.1, and
+
 &nbsp;&nbsp;&nbsp;3) To the right of X with a probability 0.1
+
 
 The discount factor (gamma) is set to 1.0, but it can be changed in the GridWorld.cpp source file. 
 Sample screenshots can be found in the folder SampleOutput.
