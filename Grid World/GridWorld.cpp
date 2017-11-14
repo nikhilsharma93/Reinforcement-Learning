@@ -17,7 +17,7 @@ using namespace cv;
 
 #define maxEpochs 500
 #define maxErrorAllowedPercent 0.01
-extern const float gammaValue = 1.0;
+extern const float gammaValue = 0.9;
 //const float gammaValue = 1.0;
 
 map<string, state*> stateCoordsAccessible;
@@ -27,6 +27,9 @@ vector<state*> listOfStates;
 map<state*, string> optimalPolicy;
 int statesHeight;
 int statesWidth;
+float probCorrect; //Probability of executing the direction chosen
+float probLeft; //Probability of going left of the direction chosen
+float probRight; //Probability of going right of the direction chosen
 
 using namespace std;
 class state;
@@ -43,6 +46,9 @@ int main(){
   string outputTemp = GetStdoutFromCommand("zenity --forms --title=\"Grid World\" --text=\"Enter the parameters\" \
      --add-entry=\"Horizontal Dimesion\" \
      --add-entry=\"Vertical Dimension\"\
+     --add-entry=\"Probability of going as intended\"\
+     --add-entry=\"Probability of going left to what was intended\"\
+     --add-entry=\"Probability of going right to what was intended\"\
      --add-entry=\"Reward for non-terminal states\" \
      --add-entry=\"Reward for positive terminal state\" \
      --add-entry=\"Reward for negative terminal state\" \
@@ -57,6 +63,18 @@ int main(){
 
   pos = outputTemp.find(delimiter);
   statesHeight = atoi(outputTemp.substr(0, pos).c_str());
+  outputTemp.erase(0, pos + delimiter.length());
+
+  pos = outputTemp.find(delimiter);
+  probCorrect = atoi(outputTemp.substr(0, pos).c_str());
+  outputTemp.erase(0, pos + delimiter.length());
+
+  pos = outputTemp.find(delimiter);
+  probLeft = atoi(outputTemp.substr(0, pos).c_str());
+  outputTemp.erase(0, pos + delimiter.length());
+
+  pos = outputTemp.find(delimiter);
+  probRight = atoi(outputTemp.substr(0, pos).c_str());
   outputTemp.erase(0, pos + delimiter.length());
 
   pos = outputTemp.find(delimiter);

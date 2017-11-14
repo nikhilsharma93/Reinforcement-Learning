@@ -14,6 +14,9 @@ extern map<state*, string> optimalPolicy;
 extern const float gammaValue;
 extern int statesHeight;
 extern int statesWidth;
+extern float probCorrect; //Probability of executing the direction chosen
+extern float probLeft; //Probability of going left of the direction chosen
+extern float probRight; //Probability of going right of the direction chosen
 map<state*, float> newUtilitiesMap;
 
 state::state(int xCord, int yCord, float reward, int stateCat, float utility){
@@ -129,13 +132,13 @@ void state::updateUtility(){
 
 float getRewardTemp(int cordLeftX, int cordLeftY, int cordRightX, int cordRightY, int cordUpX, int cordUpY){
   string cordStringLeft = IntToString(cordLeftX) + "," + IntToString(cordLeftY);
-  float utiliyLeft = 0.1 * (stateCoordsAccessible.find(cordStringLeft)->second)->getUtility();
+  float utiliyLeft = probLeft * (stateCoordsAccessible.find(cordStringLeft)->second)->getUtility();
 
   string cordStringRight = IntToString(cordRightX) + "," + IntToString(cordRightY);
-  float utiliyRight = 0.1 * (stateCoordsAccessible.find(cordStringRight)->second)->getUtility();
+  float utiliyRight = probRight * (stateCoordsAccessible.find(cordStringRight)->second)->getUtility();
 
   string cordStringUp = IntToString(cordUpX) + "," + IntToString(cordUpY);
-  float utiliyUp = 0.8 * (stateCoordsAccessible.find(cordStringUp)->second)->getUtility();
+  float utiliyUp = probCorrect * (stateCoordsAccessible.find(cordStringUp)->second)->getUtility();
   return (utiliyLeft + utiliyRight + utiliyUp);
 }
 
@@ -149,10 +152,11 @@ void state::setOptimalPolicy(){
   float rewardTempRight = getRewardTemp(cordUpX, cordUpY, cordDownX, cordDownY, cordRightX, cordRightY);
   float rewardTempDown = getRewardTemp(cordRightX, cordRightY, cordLeftX, cordLeftY, cordDownX, cordDownY);
   float maxReward = max(max(rewardTempUp, rewardTempLeft), max(rewardTempRight, rewardTempDown));
+  cout << "Optimal policy values" << currentX << "," << currentY << " are: " << rewardTempUp << " " << rewardTempLeft << " " << rewardTempRight << " " << rewardTempDown << endl;
   string optimalAction;
-  if (maxReward == rewardTempUp) optimalAction = "Up";
+  if (maxReward == rewardTempRight) optimalAction = "Right";
   else if (maxReward == rewardTempLeft) optimalAction = "Left";
-  else if (maxReward == rewardTempRight) optimalAction = "Right";
+  else if (maxReward == rewardTempUp) optimalAction = "Up";
   else optimalAction = "Down";
   optimalPolicy.insert(std::pair<state*, string>(this, optimalAction));
 }
