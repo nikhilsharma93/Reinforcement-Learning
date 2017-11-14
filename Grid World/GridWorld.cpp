@@ -17,8 +17,6 @@ using namespace cv;
 
 #define maxEpochs 500
 #define maxErrorAllowedPercent 0.01
-extern const float gammaValue = 0.9;
-//const float gammaValue = 1.0;
 
 map<string, state*> stateCoordsAccessible;
 map<string, state*> stateCoordsBlocked;
@@ -27,6 +25,7 @@ vector<state*> listOfStates;
 map<state*, string> optimalPolicy;
 int statesHeight;
 int statesWidth;
+float gammaValue;
 float probCorrect; //Probability of executing the direction chosen
 float probLeft; //Probability of going left of the direction chosen
 float probRight; //Probability of going right of the direction chosen
@@ -52,6 +51,7 @@ int main(){
      --add-entry=\"Reward for non-terminal states\" \
      --add-entry=\"Reward for positive terminal state\" \
      --add-entry=\"Reward for negative terminal state\" \
+     --add-entry=\"Discount Factor\" \
      --add-entry=\"Initial Utility of non-terminal states\" ");
 
   string delimiter = "|";
@@ -87,6 +87,10 @@ int main(){
 
   pos = outputTemp.find(delimiter);
   float rewardNegTerminal = atof(outputTemp.substr(0, pos).c_str());
+  outputTemp.erase(0, pos + delimiter.length());
+
+  pos = outputTemp.find(delimiter);
+  gammaValue = atof(outputTemp.substr(0, pos).c_str());
   outputTemp.erase(0, pos + delimiter.length());
 
   pos = outputTemp.find(delimiter);
@@ -149,7 +153,7 @@ int main(){
       (iterStateUtils->first)->setNewUtility(newUtility);
       //cout << "New utility for: " << (iterStateUtils->first) << "  " << (iterStateUtils->first)->getUtility() << endl;
     }
-    loopCount++;
+    ++loopCount;
   }
 
   cout << "Performed " << loopCount << " iterations, and ended with delta " << delta << endl;

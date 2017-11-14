@@ -11,7 +11,7 @@ extern map<string, state*> stateCoordsAccessible;
 extern map<string, state*> stateCoordsBlocked;
 extern vector<state*> listOfStates;
 extern map<state*, string> optimalPolicy;
-extern const float gammaValue;
+extern float gammaValue;
 extern int statesHeight;
 extern int statesWidth;
 extern float probCorrect; //Probability of executing the direction chosen
